@@ -1,0 +1,78 @@
+\hypertarget{_ball_8h_source}{}\doxysection{Ball.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}Ogre.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}OgreApplicationContext.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}OgreInput.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}OgreRTShaderSystem.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}OgreTrays.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{comment}{// Ball class}}
+\DoxyCodeLine{11 \textcolor{comment}{// Ball behaviour goes below VVV}}
+\DoxyCodeLine{12 \textcolor{keyword}{class }\mbox{\hyperlink{class_ball}{Ball}}}
+\DoxyCodeLine{13 \{}
+\DoxyCodeLine{14 \textcolor{keyword}{private}:}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{comment}{// Ball, similar to the paddle, uses a prefab for its shape (sphere)}}
+\DoxyCodeLine{17     Ogre::SceneNode* ballShape;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{comment}{// Balls velocity, or speed}}
+\DoxyCodeLine{20     Ogre::Vector2 velocity;}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{comment}{// Ball position}}
+\DoxyCodeLine{23     Ogre::Vector2 position;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{comment}{// Constructor for the ball class.}}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_ball}{Ball}}(Ogre::Entity* ballEntity, Ogre::SceneManager* scnMgr);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{comment}{// Ball class constructor}}
+\DoxyCodeLine{31     \mbox{\hyperlink{class_ball}{Ball}}();}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{comment}{// Ball destructor}}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_ball}{\string~Ball}}();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{comment}{// Gets Ball position}}
+\DoxyCodeLine{38     \textcolor{comment}{// Returns the position as an Ogre::Vector2}}
+\DoxyCodeLine{39     Ogre::Vector2 getPosition() \textcolor{keyword}{const};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{comment}{// Gets ball shape (sphere)}}
+\DoxyCodeLine{42     \textcolor{comment}{// Returns the shape as a Ogre::SceneNode reference}}
+\DoxyCodeLine{43     Ogre::SceneNode* getShape() \textcolor{keyword}{const};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{comment}{// Gets ball velocity/speed}}
+\DoxyCodeLine{46     \textcolor{comment}{// Returns the velocity of the ball as an Ogre::Vector2}}
+\DoxyCodeLine{47     Ogre::Vector2 getVelocity() \textcolor{keyword}{const};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{// Set ball position}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} setPosition(Ogre::Vector3 position);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{comment}{// Sets ball velocity/speed}}
+\DoxyCodeLine{55     \textcolor{keywordtype}{void} setVelocity(Ogre::Vector2 vel);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{comment}{// Called once per tick}}
+\DoxyCodeLine{59     \textcolor{comment}{// called in game class}}
+\DoxyCodeLine{60     \textcolor{comment}{// (dt) time elapsed since previous frame}}
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} update(\textcolor{keywordtype}{float} dt);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{comment}{// Checks ball position compared to screen bounds}}
+\DoxyCodeLine{64     \textcolor{comment}{// performs an AABB collision test and deflects ball velocity accordingly }}
+\DoxyCodeLine{65     \textcolor{comment}{// Ball::setVelocity(Ogre::Vector2 vel) method is what gets called after a direction is determined}}
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} checkBounds(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{comment}{// reset function is called when the ball misses paddle or hits a wall}}
+\DoxyCodeLine{69     \textcolor{comment}{// or the ball leaves the boundary. The balls velocity is set to be a random diagonal direction on each call}}
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} reset();}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \};}
+
+\end{DoxyCode}

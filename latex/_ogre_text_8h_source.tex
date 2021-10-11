@@ -1,0 +1,83 @@
+\hypertarget{_ogre_text_8h_source}{}\doxysection{Ogre\+Text.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include "{}OgreTextAreaOverlayElement.h"{}}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}OgreStringConverter.h"{}}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{keyword}{using namespace }Ogre;}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifndef \_\_OgreText\_H\_\_}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define \_\_OgreText\_H\_\_}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_ogre_text}{OgreText}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{class_ogre_text}{OgreText}}()}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         olm = OverlayManager::getSingletonPtr();}
+\DoxyCodeLine{15         \textcolor{keywordflow}{if} (init == 0)}
+\DoxyCodeLine{16         \{}
+\DoxyCodeLine{17             panel = \textcolor{keyword}{static\_cast<}OverlayContainer*\textcolor{keyword}{>}(olm-\/>createOverlayElement(\textcolor{stringliteral}{"{}Panel"{}}, \textcolor{stringliteral}{"{}GUI"{}}));}
+\DoxyCodeLine{18             panel-\/>setMetricsMode(Ogre::GMM\_PIXELS);}
+\DoxyCodeLine{19             panel-\/>setPosition(0, 0);}
+\DoxyCodeLine{20             panel-\/>setDimensions(1.0f, 1.0f);}
+\DoxyCodeLine{21             overlay = olm-\/>create(\textcolor{stringliteral}{"{}GUI\_OVERLAY"{}});}
+\DoxyCodeLine{22             overlay-\/>add2D(panel);}
+\DoxyCodeLine{23         \}}
+\DoxyCodeLine{24         ++(this-\/>init);}
+\DoxyCodeLine{25         szElement = \textcolor{stringliteral}{"{}element\_"{}} + StringConverter::toString(init);}
+\DoxyCodeLine{26         overlay = olm-\/>getByName(\textcolor{stringliteral}{"{}GUI\_OVERLAY"{}});}
+\DoxyCodeLine{27         panel = \textcolor{keyword}{static\_cast<}OverlayContainer*\textcolor{keyword}{>}(olm-\/>getOverlayElement(\textcolor{stringliteral}{"{}GUI"{}}));}
+\DoxyCodeLine{28         textArea = \textcolor{keyword}{static\_cast<}TextAreaOverlayElement*\textcolor{keyword}{>}(olm-\/>createOverlayElement(\textcolor{stringliteral}{"{}TextArea"{}}, szElement));}
+\DoxyCodeLine{29         panel-\/>addChild(textArea);}
+\DoxyCodeLine{30         overlay-\/>show();}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32     \mbox{\hyperlink{class_ogre_text}{\string~OgreText}}()}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         szElement = \textcolor{stringliteral}{"{}element\_"{}} + StringConverter::toString(init);}
+\DoxyCodeLine{35         olm-\/>destroyOverlayElement(szElement);}
+\DoxyCodeLine{36         -\/-\/(this-\/>init);}
+\DoxyCodeLine{37         \textcolor{keywordflow}{if} (init == 0)}
+\DoxyCodeLine{38         \{}
+\DoxyCodeLine{39             olm-\/>destroyOverlayElement(\textcolor{stringliteral}{"{}GUI"{}});}
+\DoxyCodeLine{40             olm-\/>destroy(\textcolor{stringliteral}{"{}GUI\_OVERLAY"{}});}
+\DoxyCodeLine{41         \}}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} setText(\textcolor{keywordtype}{char}* szString)}
+\DoxyCodeLine{44     \{}
+\DoxyCodeLine{45         textArea-\/>setCaption(szString);}
+\DoxyCodeLine{46         textArea-\/>setDimensions(1.0f, 1.0f);}
+\DoxyCodeLine{47         textArea-\/>setMetricsMode(Ogre::GMM\_RELATIVE);}
+\DoxyCodeLine{48         textArea-\/>setFontName(\textcolor{stringliteral}{"{}BlueHighway"{}});}
+\DoxyCodeLine{49         textArea-\/>setCharHeight(0.03f);}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} setText(String szString) \textcolor{comment}{// now You can use Ogre::String as text}}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         textArea-\/>setCaption(szString);}
+\DoxyCodeLine{54         textArea-\/>setDimensions(1.0f, 1.0f);}
+\DoxyCodeLine{55         textArea-\/>setMetricsMode(Ogre::GMM\_RELATIVE);}
+\DoxyCodeLine{56         textArea-\/>setFontName(\textcolor{stringliteral}{"{}BlueHighway"{}});}
+\DoxyCodeLine{57         textArea-\/>setCharHeight(0.03f);}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} setPos(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y)}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61         textArea-\/>setPosition(x, y);}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} setCol(\textcolor{keywordtype}{float} R, \textcolor{keywordtype}{float} G, \textcolor{keywordtype}{float} B, \textcolor{keywordtype}{float} I)}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65         textArea-\/>setColour(Ogre::ColourValue(R, G, B, I));}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 \textcolor{keyword}{private}:}
+\DoxyCodeLine{68     OverlayManager* olm;}
+\DoxyCodeLine{69     OverlayContainer* panel;}
+\DoxyCodeLine{70     Overlay* overlay;}
+\DoxyCodeLine{71     TextAreaOverlayElement* textArea;}
+\DoxyCodeLine{72     \textcolor{keyword}{static} \textcolor{keywordtype}{int} init;}
+\DoxyCodeLine{73     String szElement;}
+\DoxyCodeLine{74 \};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{keywordtype}{int} OgreText::init = 0;}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

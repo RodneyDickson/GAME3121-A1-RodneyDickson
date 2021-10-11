@@ -1,0 +1,124 @@
+\hypertarget{_game_8h_source}{}\doxysection{Game.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}Ball.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Paddle.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{using namespace }Ogre;}
+\DoxyCodeLine{9 \textcolor{keyword}{using namespace }OgreBites;}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{// Game Class}}
+\DoxyCodeLine{13 \textcolor{comment}{// Main base class, inherits from Application Listener and Input Listener. Any type of keyboard/mouse event based entities should be done from here}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_game}{Game}}}
+\DoxyCodeLine{16     : \textcolor{keyword}{public} ApplicationContext}
+\DoxyCodeLine{17     , \textcolor{keyword}{public} InputListener}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \textcolor{comment}{// Constructor}}
+\DoxyCodeLine{21     \textcolor{comment}{// called in main.cpp}}
+\DoxyCodeLine{22     \mbox{\hyperlink{class_game}{Game}}();}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{comment}{// Virtual Destructor}}
+\DoxyCodeLine{25     \textcolor{comment}{// called after application quits}}
+\DoxyCodeLine{26     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_game}{\string~Game}}() \{\}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} setup();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{comment}{// called when a key is pressed}}
+\DoxyCodeLine{31     \textcolor{comment}{// boolean = always true}}
+\DoxyCodeLine{32     \textcolor{comment}{// evt references to a keyboard event}}
+\DoxyCodeLine{33     \textcolor{keywordtype}{bool} keyPressed(\textcolor{keyword}{const} KeyboardEvent\& evt);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{comment}{// called once per tick}}
+\DoxyCodeLine{36     \textcolor{comment}{// returns boolean = always true}}
+\DoxyCodeLine{37     \textcolor{comment}{// evt references to a frame event}}
+\DoxyCodeLine{38     \textcolor{keywordtype}{bool} frameRenderingQueued(\textcolor{keyword}{const} FrameEvent\& evt);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{comment}{// refreshes all labels}}
+\DoxyCodeLine{41     \textcolor{keywordtype}{void} refreshUserInterface();}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{comment}{// called when the mouse is moved}}
+\DoxyCodeLine{45     \textcolor{comment}{// boolean = always true}}
+\DoxyCodeLine{46     \textcolor{comment}{// evt is a reference to a mouse motion event}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{bool} mouseMoved(\textcolor{keyword}{const} MouseMotionEvent\& evt) \textcolor{keyword}{override};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{// Tray listener is used for our GUI system}}
+\DoxyCodeLine{51     OgreBites::TrayListener myTrayListener;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{comment}{// Gui showing our score}}
+\DoxyCodeLine{56     OgreBites::Label* m\_scoreLabel;}
+\DoxyCodeLine{57     }
+\DoxyCodeLine{58     \textcolor{comment}{// Gui showing our lives}}
+\DoxyCodeLine{59     OgreBites::Label* m\_livesLabel;}
+\DoxyCodeLine{60     }
+\DoxyCodeLine{61     \textcolor{comment}{// Gui showing our frames per second}}
+\DoxyCodeLine{62     OgreBites::Label* m\_fpsLabel;}
+\DoxyCodeLine{63     }
+\DoxyCodeLine{64     \textcolor{comment}{// Gui showing our miliseconds per frame (0.1667)}}
+\DoxyCodeLine{65     OgreBites::Label* m\_mspfLabel;  \textcolor{comment}{// Milleseconds per frame}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{comment}{// create a default label}}
+\DoxyCodeLine{68     OgreBites::Label* m\_myLabel;}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{// create our game over label for later}}
+\DoxyCodeLine{71     OgreBites::Label* m\_gameOverLabel;}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{// tray manager}}
+\DoxyCodeLine{74     OgreBites::TrayManager* mTrayMgr;}
+\DoxyCodeLine{75     }
+\DoxyCodeLine{76     \textcolor{comment}{// Displays game over / quit button}}
+\DoxyCodeLine{77     OgreBites::Button* m\_quitBtn = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{comment}{// Reference to our ball entity}}
+\DoxyCodeLine{80     std::shared\_ptr<Ball> m\_ball;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{// reference to our paddle entity}}
+\DoxyCodeLine{83     std::shared\_ptr<Paddle> m\_playerPaddle;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{private}:}
+\DoxyCodeLine{86     }
+\DoxyCodeLine{87     \textcolor{comment}{// players aspect ratio for x (<-\/-\/>) 325}}
+\DoxyCodeLine{88     \textcolor{keywordtype}{float} aspectX = 325.0f;}
+\DoxyCodeLine{89     }
+\DoxyCodeLine{90     \textcolor{comment}{// players aspect ratio for y (\string^   V) 243}}
+\DoxyCodeLine{91     \textcolor{keywordtype}{float} aspectY = 243.0f;}
+\DoxyCodeLine{92     }
+\DoxyCodeLine{93     \textcolor{comment}{// sets up our game score to start at 0}}
+\DoxyCodeLine{94     \textcolor{keywordtype}{int} score = 0;}
+\DoxyCodeLine{95     }
+\DoxyCodeLine{96     \textcolor{comment}{// sets our lives to a max of 3}}
+\DoxyCodeLine{97     \textcolor{keywordtype}{int} lives = 3;}
+\DoxyCodeLine{98     }
+\DoxyCodeLine{99     \textcolor{comment}{// int for number of frames to keep track of frames per second}}
+\DoxyCodeLine{100     \textcolor{keywordtype}{int} numOfFrames = 0;}
+\DoxyCodeLine{101     }
+\DoxyCodeLine{102     \textcolor{comment}{// displays time since last frame to help give fps}}
+\DoxyCodeLine{103     \textcolor{keywordtype}{float} timeSinceLastFrame = 0.0f;}
+\DoxyCodeLine{104     }
+\DoxyCodeLine{105     \textcolor{comment}{// also helps display fps}}
+\DoxyCodeLine{106     \textcolor{keywordtype}{float} latestFramerate = 0.0f;}
+\DoxyCodeLine{107     }
+\DoxyCodeLine{108     \textcolor{comment}{// tells us how often to refresh our stats}}
+\DoxyCodeLine{109     \textcolor{keywordtype}{float} refreshTime = 0.9f;}
+\DoxyCodeLine{110     }
+\DoxyCodeLine{111     \textcolor{comment}{// set up a buffer for all of our gui items}}
+\DoxyCodeLine{112     \textcolor{keywordtype}{char} buffer[50];}
+\DoxyCodeLine{113     }
+\DoxyCodeLine{114     \textcolor{comment}{// our collision detection for our paddle and ball}}
+\DoxyCodeLine{115     \textcolor{keywordtype}{bool} collisionDetect = \textcolor{keyword}{false};}
+\DoxyCodeLine{116     }
+\DoxyCodeLine{117     \textcolor{comment}{// game over condition when we run our of lives}}
+\DoxyCodeLine{118     \textcolor{keywordtype}{bool} gameOver = \textcolor{keyword}{false};}
+\DoxyCodeLine{119 \};}
+
+\end{DoxyCode}
