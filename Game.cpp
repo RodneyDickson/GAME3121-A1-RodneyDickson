@@ -56,7 +56,7 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
     m_playerPaddle->update(evt.timeSinceLastEvent);
 
     Vector2 ballPos = m_ball->getPosition();
-    Vector2 batPos = m_playerPaddle->getPosition();
+    Vector2 paddlePos = m_playerPaddle->getPosition();
 
     if (ballPos.y < -aspectY * 0.5f)
     {
@@ -77,7 +77,7 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
     }
 
     // collision with our paddle
-    if (ballPos.y < batPos.y + 10.f && ballPos.y > batPos.y - 10.0f && ballPos.x > batPos.x - 50.f && ballPos.x < batPos.x + 50.f)
+    if (ballPos.y < paddlePos.y + 10.f && ballPos.y > paddlePos.y - 10.0f && ballPos.x > paddlePos.x - 50.f && ballPos.x < paddlePos.x + 50.f)
     {
         // Only the first time it collided.
         if (!collisionDetect)
