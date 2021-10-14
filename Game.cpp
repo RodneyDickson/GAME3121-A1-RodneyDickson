@@ -1,20 +1,17 @@
 #include "Game.h"
 
-Game::Game()
-    : ApplicationContext("GAME3121 - Assignment 1 - by Rodney Dickson")
+Game::Game() : ApplicationContext("GAME3121 - Assignment 1 - by Rodney Dickson")
 {
+
 }
 
 bool Game::frameRenderingQueued(const FrameEvent& evt)
 {
     if (latestFramerate < 30.f && !gameOver)
     {
-        // if the window gets resized, we dont want the ball to move to the bottom of the screen and result in an instant life lost now
-        // would we?
         m_ball->reset();
     }
 
-    //std::cout << "viewports: " << getRenderWindow()->getViewport(0)->getActualWidth() << std::endl;
     // Pause game when the game is over
     if (gameOver)
     {
@@ -62,14 +59,15 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
     {
         lives--;
         this->refreshUserInterface();
+
         if (lives <= 0)
         {
             m_gameOverLabel = mTrayMgr->createLabel(TL_CENTER, "L_GAMEOVER", "GAME OVER!", 150);
             m_quitBtn = mTrayMgr->createButton(TL_CENTER, "L_GAMEOVERBUTTON", "Quit Game", 150);
 
-
             gameOver = true;
         }
+
         else
         {
             m_ball->reset();
@@ -85,27 +83,27 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
             collisionDetect = true;
 
             score += 1;
+
             if (score % 10 == 0)
             {
                 lives += 1;
             }
+
             this->refreshUserInterface();
 
             Vector2 vel = m_ball->getVelocity();
             vel.y *= -1.0f;
-            //std::cout << "DEFLECT!" << std::endl;
+
             m_ball->setVelocity(vel);
-
         }
-
     }
+
     else
     {
         collisionDetect = false;
     }
 
-
-    // moves ball based off last frame
+    // moves ball based off of last frame
     Vector3 move = Vector3(evt.timeSinceLastFrame * 15.f, 0.f, 0.f);
 
     return true;
@@ -115,7 +113,9 @@ bool Game::mouseMoved(const MouseMotionEvent& evt)
 {
     // Pause game when the game is over
     if (gameOver)
+    {
         return true;
+    }
 
     float mouseToWorld = (evt.x - (float)getRenderWindow()->getWidth() / 2.0f) * 0.5f;
 
@@ -127,12 +127,12 @@ bool Game::mouseMoved(const MouseMotionEvent& evt)
 void Game::refreshUserInterface()
 {
     // This function refreshes the user interface for each score/lives update
-    // Score UI
+    // Score UI label
     {
         sprintf_s(buffer, "Score: %d", score);
         m_scoreLabel->setCaption(buffer);
     }
-    // Lives ui
+    // Lives UI label
     {
         sprintf_s(buffer, "Lives: %d", lives);
         m_livesLabel->setCaption(buffer);
@@ -153,7 +153,6 @@ void Game::setup()
     shadergen->addSceneManager(scnMgr);
     scnMgr->setAmbientLight(ColourValue(0.9, 0.9, 0.9));
 
-
     SceneNode* camNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 
     // create the camera
@@ -169,10 +168,9 @@ void Game::setup()
     camNode->setPosition(0, 0, aspectX); // 0, 0, aspectX
     mTrayMgr = new OgreBites::TrayManager("InterfaceName", getRenderWindow());
 
-
-
     // adds tray to game screen
     scnMgr->addRenderQueueListener(mOverlaySystem);
+
     // adds tray to game screen
     addInputListener(mTrayMgr);
 
@@ -188,15 +186,17 @@ void Game::setup()
     m_mspfLabel = mTrayMgr->createLabel(TL_BOTTOMRIGHT, "L_MSPF", "m/s: 0.1667", 150);
     m_myLabel = mTrayMgr->createLabel(TL_BOTTOM, "L_LABEL", "Game Engine Development I - A1 - Rodney Dickson", 450);
 
-
+    // Creates our 2 entities (player paddle and ball)
     Ogre::Entity* ballEntity = scnMgr->createEntity(SceneManager::PrefabType::PT_SPHERE);
     Ogre::Entity* paddleEntity = scnMgr->createEntity(SceneManager::PrefabType::PT_PLANE);
 
+    // Sets ball to be a ball entity
     m_ball = std::make_shared<Ball>(ballEntity, scnMgr);
 
     // random direction
     srand(unsigned(time(NULL)));
 
+    // sets or resets our balls position
     m_ball->reset();
 
     // set ball position

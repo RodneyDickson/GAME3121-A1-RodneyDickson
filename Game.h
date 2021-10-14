@@ -50,8 +50,6 @@ public:
     // Tray listener is used for our GUI system
     OgreBites::TrayListener myTrayListener;
 
-
-
     // Gui showing our score
     OgreBites::Label* m_scoreLabel;
     
@@ -62,7 +60,7 @@ public:
     OgreBites::Label* m_fpsLabel;
     
     // Gui showing our miliseconds per frame (0.1667)
-    OgreBites::Label* m_mspfLabel;  // Milleseconds per frame
+    OgreBites::Label* m_mspfLabel; 
 
     // create a default label
     OgreBites::Label* m_myLabel;
@@ -114,6 +112,6 @@ private:
     // our collision detection for our paddle and ball
     bool collisionDetect = false;
     
-    // game over condition when we run our of lives
+    // game over condition when we run out of lives
     bool gameOver = false;
 };

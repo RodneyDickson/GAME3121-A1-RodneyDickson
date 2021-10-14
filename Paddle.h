@@ -9,7 +9,6 @@
 class Paddle
 {
 private:
-
 	// Shape of paddle based off of plane prefab
 	Ogre::SceneNode* paddleShape;
 
@@ -20,7 +19,6 @@ private:
 	Ogre::Vector2 position;
 
 public:
-
 	// Creates ball and scene manager
 	Paddle(Ogre::Entity* ballEntity, Ogre::SceneManager* scnMgr);
 
@@ -29,7 +27,6 @@ public:
 
 	// Create paddle destructor
 	~Paddle();
-
 
 	// Position of our paddle
 	// Returns the position as an Ogre::Vector2
