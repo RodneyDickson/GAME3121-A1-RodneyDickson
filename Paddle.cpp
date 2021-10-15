@@ -22,7 +22,7 @@ Paddle::~Paddle()
 // gets our paddles position
 Ogre::Vector2 Paddle::getPosition() const
 {
-    return position;
+    return paddlePosition;
 }
 
 // gets our paddles shape
@@ -39,16 +39,16 @@ Ogre::Vector2 Paddle::getVelocity() const
 
 // sets our players position
 // can be based on mouse movement or left/right arrows
-void Paddle::setPosition(Ogre::Vector3 position)
+void Paddle::setPosition(Ogre::Vector3 paddlePosition)
 {
-    paddleShape->setPosition(position);
-    this->position = Ogre::Vector2(position.x, position.y);
+    paddleShape->setPosition(paddlePosition);
+    this->paddlePosition = Ogre::Vector2(paddlePosition.x, paddlePosition.y);
 }
 
 // sets our players velocity
-void Paddle::setVelocity(Ogre::Vector2 vel)
+void Paddle::setVelocity(Ogre::Vector2 paddleVelocity)
 {
-    this->velocity = vel;
+    this->paddleVelocity = paddleVelocity;
 }
 
 void Paddle::update(float dt)

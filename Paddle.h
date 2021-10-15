@@ -13,10 +13,10 @@ private:
 	Ogre::SceneNode* paddleShape;
 
 	// Velocity, or speed, of our paddle
-	Ogre::Vector2 velocity;
+	Ogre::Vector2 paddleVelocity;
 
 	// Position of our paddle
-	Ogre::Vector2 position;
+	Ogre::Vector2 paddlePosition;
 
 public:
 	// Creates ball and scene manager
@@ -41,10 +41,10 @@ public:
 	Ogre::Vector2 getVelocity() const;
 
 	// Sets paddle position
-	void setPosition(Ogre::Vector3 position);
+	void setPosition(Ogre::Vector3 paddlePosition);
 
 	// Sets paddle velocity, or speed.
-	void setVelocity(Ogre::Vector2 vel);
+	void setVelocity(Ogre::Vector2 paddleVelocity);
 
 	// update called once per frame  
 	// (dt) stands for time elapsed since previous frame (must use a frame listener for delta time)

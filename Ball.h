@@ -15,10 +15,10 @@ private:
 	Ogre::SceneNode* ballShape;
 
 	// Balls velocity, or speed
-	Ogre::Vector2 velocity;
+	Ogre::Vector2 ballVelocity;
 
 	// Ball position
-	Ogre::Vector2 position;
+	Ogre::Vector2 ballPosition;
 
 public:
 	// Constructor for the ball class.
@@ -30,23 +30,23 @@ public:
 	// Ball destructor
 	~Ball();
 
-	// Gets Ball position
-	// Returns the position as an Ogre::Vector2
-	Ogre::Vector2 getPosition() const;
-
 	// Gets ball shape (sphere)
 	// Returns the shape as a Ogre::SceneNode reference
 	Ogre::SceneNode* getShape() const;
+
+	// Gets Ball position
+	// Returns the position as an Ogre::Vector2
+	Ogre::Vector2 getPosition() const;
 
 	// Gets ball velocity/speed
 	// Returns the velocity of the ball as an Ogre::Vector2
 	Ogre::Vector2 getVelocity() const;
 
 	// Set ball position
-	void setPosition(Ogre::Vector3 position);
+	void setPosition(Ogre::Vector3 ballPosition);
 
 	// Sets ball velocity/speed
-	void setVelocity(Ogre::Vector2 vel);
+	void setVelocity(Ogre::Vector2 ballVelocity);
 
 	// Called once per tick in game class
 	// (float dt) is time elapsed since previous frame

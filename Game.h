@@ -73,6 +73,7 @@ public:
     
     // Displays game over / quit button
     OgreBites::Button* m_quitBtn = nullptr;
+    OgreBites::Button* m_resetBtn = nullptr;
 
     // Reference to our ball entity
     std::shared_ptr<Ball> m_ball;

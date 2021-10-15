@@ -15,10 +15,14 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
     // Pause game when the game is over
     if (gameOver)
     {
+        // Show cursor since you need it to click UI
+        mTrayMgr->showCursor();
+
         if (m_quitBtn->getState() == OgreBites::ButtonState::BS_DOWN)
         {
             getRoot()->queueEndRendering();
         }
+      
         return true;
     }
 
@@ -64,8 +68,11 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
         {
             m_gameOverLabel = mTrayMgr->createLabel(TL_CENTER, "L_GAMEOVER", "GAME OVER!", 150);
             m_quitBtn = mTrayMgr->createButton(TL_CENTER, "L_GAMEOVERBUTTON", "Quit Game", 150);
+            //m_resetBtn = mTrayMgr->createButton(TL_CENTER, "L_RESETBUTTON", "Reset", 150);
 
             gameOver = true;
+
+            //m_ball->reset();
         }
 
         else
@@ -80,10 +87,13 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
         // Only the first time it collided.
         if (!collisionDetect)
         {
+            // if colliding set to true
             collisionDetect = true;
 
+            // add to our score every paddle touch
             score += 1;
 
+            // gives extra life per 10 rebounds
             if (score % 10 == 0)
             {
                 lives += 1;
@@ -91,10 +101,10 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
 
             this->refreshUserInterface();
 
-            Vector2 vel = m_ball->getVelocity();
-            vel.y *= -1.0f;
+            Vector2 ballVelocity = m_ball->getVelocity();
+            ballVelocity.y *= (score, -1.0f);
 
-            m_ball->setVelocity(vel);
+            m_ball->setVelocity(ballVelocity);
         }
     }
 
@@ -117,6 +127,7 @@ bool Game::mouseMoved(const MouseMotionEvent& evt)
         return true;
     }
 
+    // constrains mouse to confines of aspect window
     float mouseToWorld = (evt.x - (float)getRenderWindow()->getWidth() / 2.0f) * 0.5f;
 
     // sets position of paddle to where the mouse is, minus 100 on the y (going down)
@@ -164,6 +175,10 @@ void Game::setup()
     camNode->attachObject(cam);
     getRenderWindow()->addViewport(cam);
 
+    // Makes our game a nice blue color
+    // BOTH paddle AND ball though
+    scnMgr->setAmbientLight(ColourValue(0.0f, 1.0f, 1.0f));
+
     // sets cam position to centre of screen
     camNode->setPosition(0, 0, aspectX); // 0, 0, aspectX
     mTrayMgr = new OgreBites::TrayManager("InterfaceName", getRenderWindow());
@@ -176,6 +191,9 @@ void Game::setup()
 
     // Displays the OGRE logo
     //mTrayMgr->showLogo(TL_TOPRIGHT);
+
+    // Hides OGRE Cursor
+    mTrayMgr->hideCursor();
 
     // Creates SCORE and LIVES labels. Sets size
     m_scoreLabel = mTrayMgr->createLabel(TL_TOPLEFT, "L_SCORE", "SCORE: XX", 150);
