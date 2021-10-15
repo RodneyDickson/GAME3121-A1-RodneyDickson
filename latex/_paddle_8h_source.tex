@@ -12,49 +12,46 @@
 \DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_paddle}{Paddle}}}
 \DoxyCodeLine{10 \{}
 \DoxyCodeLine{11 \textcolor{keyword}{private}:}
-\DoxyCodeLine{12 }
-\DoxyCodeLine{13     \textcolor{comment}{// Shape of paddle based off of plane prefab}}
-\DoxyCodeLine{14     Ogre::SceneNode* paddleShape;}
-\DoxyCodeLine{15 }
-\DoxyCodeLine{16     \textcolor{comment}{// Velocity, or speed, of our paddle}}
-\DoxyCodeLine{17     Ogre::Vector2 velocity;}
-\DoxyCodeLine{18 }
-\DoxyCodeLine{19     \textcolor{comment}{// Position of our paddle}}
-\DoxyCodeLine{20     Ogre::Vector2 position;}
-\DoxyCodeLine{21 }
-\DoxyCodeLine{22 \textcolor{keyword}{public}:}
-\DoxyCodeLine{23 }
-\DoxyCodeLine{24     \textcolor{comment}{// Creates ball and scene manager}}
-\DoxyCodeLine{25     \mbox{\hyperlink{class_paddle}{Paddle}}(Ogre::Entity* ballEntity, Ogre::SceneManager* scnMgr);}
-\DoxyCodeLine{26 }
-\DoxyCodeLine{27     \textcolor{comment}{// Create paddle constructor}}
-\DoxyCodeLine{28     \mbox{\hyperlink{class_paddle}{Paddle}}();}
-\DoxyCodeLine{29 }
-\DoxyCodeLine{30     \textcolor{comment}{// Create paddle destructor}}
-\DoxyCodeLine{31     \mbox{\hyperlink{class_paddle}{\string~Paddle}}();}
-\DoxyCodeLine{32 }
-\DoxyCodeLine{33 }
-\DoxyCodeLine{34     \textcolor{comment}{// Position of our paddle}}
-\DoxyCodeLine{35     \textcolor{comment}{// Returns the position as an Ogre::Vector2}}
-\DoxyCodeLine{36     Ogre::Vector2 getPosition() \textcolor{keyword}{const};}
-\DoxyCodeLine{37 }
-\DoxyCodeLine{38     \textcolor{comment}{// Paddle shape reference}}
-\DoxyCodeLine{39     \textcolor{comment}{// Returns the shape as a Ogre::SceneNode reference}}
-\DoxyCodeLine{40     Ogre::SceneNode* getShape() \textcolor{keyword}{const};}
-\DoxyCodeLine{41 }
-\DoxyCodeLine{42     \textcolor{comment}{// Our paddles velocity/speed}}
-\DoxyCodeLine{43     \textcolor{comment}{// Returns the velocity of the ball as an Ogre::Vector2}}
-\DoxyCodeLine{44     Ogre::Vector2 getVelocity() \textcolor{keyword}{const};}
+\DoxyCodeLine{12     \textcolor{comment}{// Shape of paddle based off of plane prefab}}
+\DoxyCodeLine{13     Ogre::SceneNode* paddleShape;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{comment}{// Velocity, or speed, of our paddle}}
+\DoxyCodeLine{16     Ogre::Vector2 paddleVelocity;}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \textcolor{comment}{// Position of our paddle}}
+\DoxyCodeLine{19     Ogre::Vector2 paddlePosition;}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22     \textcolor{comment}{// Creates ball and scene manager}}
+\DoxyCodeLine{23     \mbox{\hyperlink{class_paddle}{Paddle}}(Ogre::Entity* ballEntity, Ogre::SceneManager* scnMgr);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{comment}{// Create paddle constructor}}
+\DoxyCodeLine{26     \mbox{\hyperlink{class_paddle}{Paddle}}();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{comment}{// Create paddle destructor}}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_paddle}{\string~Paddle}}();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{comment}{// Position of our paddle}}
+\DoxyCodeLine{32     \textcolor{comment}{// Returns the position as an Ogre::Vector2}}
+\DoxyCodeLine{33     Ogre::Vector2 getPosition() \textcolor{keyword}{const};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{comment}{// Paddle shape reference}}
+\DoxyCodeLine{36     \textcolor{comment}{// Returns the shape as a Ogre::SceneNode reference}}
+\DoxyCodeLine{37     Ogre::SceneNode* getShape() \textcolor{keyword}{const};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{comment}{// Our paddles velocity/speed}}
+\DoxyCodeLine{40     \textcolor{comment}{// Returns the velocity of the ball as an Ogre::Vector2}}
+\DoxyCodeLine{41     Ogre::Vector2 getVelocity() \textcolor{keyword}{const};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{comment}{// Sets paddle position}}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} setPosition(Ogre::Vector3 paddlePosition);}
 \DoxyCodeLine{45 }
-\DoxyCodeLine{46     \textcolor{comment}{// Sets paddle position}}
-\DoxyCodeLine{47     \textcolor{keywordtype}{void} setPosition(Ogre::Vector3 position);}
+\DoxyCodeLine{46     \textcolor{comment}{// Sets paddle velocity, or speed.}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} setVelocity(Ogre::Vector2 paddleVelocity);}
 \DoxyCodeLine{48 }
-\DoxyCodeLine{49     \textcolor{comment}{// Sets paddle velocity, or speed.}}
-\DoxyCodeLine{50     \textcolor{keywordtype}{void} setVelocity(Ogre::Vector2 vel);}
-\DoxyCodeLine{51 }
-\DoxyCodeLine{52     \textcolor{comment}{// update called once per frame  }}
-\DoxyCodeLine{53     \textcolor{comment}{// (dt) stands for time elapsed since previous frame (must use a frame listener for delta time)}}
-\DoxyCodeLine{54     \textcolor{keywordtype}{void} update(\textcolor{keywordtype}{float} dt);}
-\DoxyCodeLine{55 \};}
+\DoxyCodeLine{49     \textcolor{comment}{// update called once per frame  }}
+\DoxyCodeLine{50     \textcolor{comment}{// (dt) stands for time elapsed since previous frame (must use a frame listener for delta time)}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} update(\textcolor{keywordtype}{float} dt);}
+\DoxyCodeLine{52 \};}
 
 \end{DoxyCode}
