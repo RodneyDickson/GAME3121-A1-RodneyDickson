@@ -6,7 +6,7 @@ Ball::Ball(Ogre::Entity* ballEntity, Ogre::SceneManager* scnMgr)
 	// Set position, size
 	ballShape = scnMgr->getRootSceneNode()->createChildSceneNode();
 	ballShape->setPosition(0, 20, 0); // about mid screen
-	ballShape->setScale(0.2f, 0.2f, 0.2f);
+	ballShape->setScale(0.1f, 0.1f, 0.1f);
 	ballShape->attachObject(ballEntity);
 
 	// Set starting velocity/speed and position to zero

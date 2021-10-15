@@ -7,13 +7,14 @@ Game::Game() : ApplicationContext("GAME3121 - Assignment 1 - by Rodney Dickson")
 
 bool Game::frameRenderingQueued(const FrameEvent& evt)
 {
+    // Checks if our framerate is over 30 to play, if not, ball keeps resetting
     if (latestFramerate < 30.f && !gameOver)
     {
         m_ball->reset();
     }
 
     // Pause game when the game is over
-    if (gameOver)
+    if (gameOver == true)
     {
         // Show cursor since you need it to click UI
         mTrayMgr->showCursor();
@@ -38,10 +39,11 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
         numOfFrames = 0;
         timeSinceLastFrame = 0.0f;
 
+        // fps shows 1 decimal, both are updated once per second (as name states)
         sprintf_s(buffer, "FPS: %.1f", latestFramerate);
         m_fpsLabel->setCaption(buffer);
 
-    // M/s per frame (shows 3 decimals)
+        // m/s per frame (shows 3 decimals)
         sprintf_s(buffer, "m/s %.3f", evt.timeSinceLastFrame);
         m_mspfLabel->setCaption(buffer);
     }
@@ -56,10 +58,10 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
     // Updates paddle
     m_playerPaddle->update(evt.timeSinceLastEvent);
 
-    Vector2 ballPos = m_ball->getPosition();
-    Vector2 paddlePos = m_playerPaddle->getPosition();
+    Vector2 ballPosition = m_ball->getPosition();
+    Vector2 paddlePosition = m_playerPaddle->getPosition();
 
-    if (ballPos.y < -aspectY * 0.5f)
+    if (ballPosition.y < -aspectY * 0.5f)
     {
         lives--;
         this->refreshUserInterface();
@@ -81,8 +83,20 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
         }
     }
 
+    // checks paddle position against bounds
+    if (paddlePosition.x < -150.0f)
+    {
+        m_playerPaddle->setPosition(Vector3(-150.0f, -100.0f, 0.f));
+    }
+
+    // checks paddle position against bounds
+    if (paddlePosition.x > 150.0f)
+    {
+        m_playerPaddle->setPosition(Vector3(150.0f, -100.0f, 0.f));
+    }
+
     // collision with our paddle
-    if (ballPos.y < paddlePos.y + 10.f && ballPos.y > paddlePos.y - 10.0f && ballPos.x > paddlePos.x - 50.f && ballPos.x < paddlePos.x + 50.f)
+    if (ballPosition.y < paddlePosition.y + 10.f && ballPosition.y > paddlePosition.y - 10.0f && ballPosition.x > paddlePosition.x - 50.f && ballPosition.x < paddlePosition.x + 50.f)
     {
         // Only the first time it collided.
         if (!collisionDetect)
@@ -102,7 +116,7 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
             this->refreshUserInterface();
 
             Vector2 ballVelocity = m_ball->getVelocity();
-            ballVelocity.y *= (score, -1.0f);
+            ballVelocity.y *= -1.0f;
 
             m_ball->setVelocity(ballVelocity);
         }
@@ -122,7 +136,7 @@ bool Game::frameRenderingQueued(const FrameEvent& evt)
 bool Game::mouseMoved(const MouseMotionEvent& evt)
 {
     // Pause game when the game is over
-    if (gameOver)
+    if (gameOver == true)
     {
         return true;
     }
@@ -205,8 +219,8 @@ void Game::setup()
     m_myLabel = mTrayMgr->createLabel(TL_BOTTOM, "L_LABEL", "Game Engine Development I - A1 - Rodney Dickson", 450);
 
     // Creates our 2 entities (player paddle and ball)
-    Ogre::Entity* ballEntity = scnMgr->createEntity(SceneManager::PrefabType::PT_SPHERE);
-    Ogre::Entity* paddleEntity = scnMgr->createEntity(SceneManager::PrefabType::PT_PLANE);
+    Ogre::Entity* ballEntity = scnMgr->createEntity(SceneManager::PrefabType::PT_SPHERE);   // ball is sphere prefab
+    Ogre::Entity* paddleEntity = scnMgr->createEntity(SceneManager::PrefabType::PT_PLANE);  // paddle is plane prefab
 
     // Sets ball to be a ball entity
     m_ball = std::make_shared<Ball>(ballEntity, scnMgr);
